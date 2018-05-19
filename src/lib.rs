@@ -7,7 +7,7 @@ pub struct Borrow<'a, K: 'a + Hash + Eq, V: 'a> {
 }
 
 impl<'a, K: 'a + Hash + Eq, V> Borrow<'a, K, V> {
-	pub fn with_hashset(original: &'a mut HashMap<K, V>, keys: &HashSet<K>) -> Self {
+	pub fn with_hashset(original: &'a mut HashMap<K, V>, keys: &HashSet<K>, printing: bool) -> Self {
 		let mut borrows = Vec::with_capacity(keys.len());
 		
 		for key in keys {
@@ -16,7 +16,9 @@ impl<'a, K: 'a + Hash + Eq, V> Borrow<'a, K, V> {
 					borrows.push(&mut *(value as *mut V));
 				}
 			} else {
-				println!("couldn't find entry");
+				if printing {
+					println!("failed to find entry in hashmap borrow");
+				}
 			}
 		}
 		
@@ -57,7 +59,7 @@ impl<'a, K: 'a + Hash + Eq, V> Borrow<'a, K, V> {
 	}
 	
 	pub fn borrow_vec<'b: 'c, 'c>(&'b mut self) -> &'c mut Vec<&'a mut V> {
-		&mut (self.borrows)
+		&mut self.borrows
 	}
 	
 	pub unsafe fn into_vec(self) -> Vec<&'a mut V> {
