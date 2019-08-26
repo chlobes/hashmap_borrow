@@ -1,6 +1,7 @@
 [package]
 name = "hashmap_borrow"
-version = "0.1.0"
-authors = ["pypypypypypypypypyp <1michand1@gmail.com>"]
+version = "0.2.0"
+authors = ["pypypypypypypypypyp"]
+edition = "2018"
 
 [dependencies]
