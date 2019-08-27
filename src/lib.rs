@@ -1,6 +1,7 @@
 use std::collections::{HashMap, HashSet};
 use std::hash::Hash;
 
+#[derive(Debug)]
 pub struct Borrow<'a, K: 'a + Hash + Eq, V: 'a> {
 	_original: &'a mut HashMap<K, V>,
 	borrows: Vec<&'a mut V>,
