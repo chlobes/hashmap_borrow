@@ -59,7 +59,7 @@ impl<'a, K: 'a + Eq + Hash, V> Borrow<'a, K, V> {
 			for i in 0..(keys.len()-1) {
 				for j in (i+1)..keys.len() {
 					if keys[i] == keys[j] {
-						panic!("tried to mutably borrow multiple ");
+						panic!("tried to mutably borrow multiple keys from same hashmap");
 					}
 				}
 			}
